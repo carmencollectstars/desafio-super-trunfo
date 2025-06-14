@@ -1,0 +1,44 @@
+# desafio-super-trunfo
+Criar um jogo onde duas cartas (do jogador e do computador) são comparadas em atributos (velocidade, força, etc.). O jogador escolhe qual atributo disputar, e o maior valor vence a rodada!
+
+import random
+
+# Dicionário de cartas (nome: [atributos])
+cartas = {
+    "Carro Veloz": {"Velocidade": 200, "Força": 50, "Poder": 80},
+    "Robô Gigante": {"Velocidade": 60, "Força": 90, "Poder": 100},
+    "Super Herói": {"Velocidade": 150, "Força": 70, "Poder": 95}
+}
+
+# Função para sortear cartas
+def sortear_carta():
+    nome_carta = random.choice(list(cartas.keys()))
+    return nome_carta, cartas[nome_carta]
+
+# Jogador e computador recebem cartas
+jogador_nome, jogador_carta = sortear_carta()
+computador_nome, computador_carta = sortear_carta()
+
+print(f"\nSua carta: {jogador_nome}")
+print(f"Atributos: {jogador_carta}")
+
+# Jogador escolhe atributo
+atributo = input("\nEscolha um atributo (Velocidade/Força/Poder): ").capitalize()
+
+# Verifica se o atributo existe
+if atributo in jogador_carta:
+    jogador_valor = jogador_carta[atributo]
+    computador_valor = computador_carta[atributo]
+
+    print(f"\nSua carta ({jogador_nome}): {atributo} = {jogador_valor}")
+    print(f"Carta do computador ({computador_nome}): {atributo} = {computador_valor}")
+
+    # Comparação
+    if jogador_valor > computador_valor:
+        print("\n🎉 Você venceu esta rodada!")
+    elif jogador_valor < computador_valor:
+        print("\n😢 O computador venceu!")
+    else:
+        print("\nEmpate!")
+else:
+    print("\nAtributo inválido! Tente novamente.")
